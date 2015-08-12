@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <group android:checkableBehavior="all">
+        <item
+            android:id="@+id/nav_home"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_youtube"
+            android:title="@string/nav_youtube" />
+        <item
+            android:id="@+id/navItem3"
+            android:title="item3" />
+        <item
+            android:id="@+id/navItem4"
+            android:title="item4" />
+
+    </group>
+
+
+</menu>

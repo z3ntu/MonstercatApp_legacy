@@ -1,0 +1,66 @@
+package io.github.z3ntu.monstercatapp;
+
+import android.content.Context;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/**
+ * Created by luca on 21.07.15.
+ */
+public class MonstercatHelper {
+
+    private final Context context;
+    private final RequestQueue requestQueue;
+
+    public MonstercatHelper(Context context, RequestQueue requestQueue) {
+
+        this.context = context;
+        this.requestQueue = requestQueue;
+    }
+
+
+    public void getMonstercatVideos(final RecyclerViewAdapter adapter) {
+        String url = "https://www.googleapis.com/youtube/v3/search?key=" + Config.API_KEY + "&channelId=UCJ6td3C9QlPO9O_J5dF4ZzA&part=snippet,id&order=date&maxResults=20";
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    JSONArray items = response.getJSONArray("items");
+
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject video = items.getJSONObject(i);
+                        JSONObject snippet = video.getJSONObject("snippet");
+                        System.out.println("[MonstercatApp] Video title: " + snippet.getString("title"));
+                        JSONObject id = video.getJSONObject("id");
+                        System.out.println("[MonstercatApp] Video id: " + id.getString("videoId"));
+/*                        if(i==0) {
+//                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v="+id.getString("videoId"))));
+                            startYoutubeVideo(id.getString("videoId"));
+                        }*/
+                        adapter.add(new MonstercatVideo(snippet.getString("title"), id.getString("videoId")));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "ERROR! - " + error.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(request);
+    }
+
+
+}

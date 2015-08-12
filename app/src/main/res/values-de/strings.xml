@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MonstercatApp</string>
+    <string name="action_example">Beispiel Aktion</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="header_description">Kopfzeilenbild</string>
+    <string name="hello_world">Hallo Welt!</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_youtube">YouTube Videos</string>
+    <string name="navigation_drawer_close">Seitenleiste schließen</string>
+    <string name="navigation_drawer_open">Seitenleiste öffnen</string>
+    <string name="title_section1">Sektion 1</string>
+    <string name="title_section2">Sektion 2</string>
+    <string name="title_section3">Sektion 3</string>
+    <string name="youtube_not_found">YouTube App wurde nicht gefunden, einige Sachen werden komisch ausschauen.</string>
+</resources>
